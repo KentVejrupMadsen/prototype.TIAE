@@ -1,0 +1,5 @@
+[default]
+entity = designermadsen
+project = tiae
+base_url = https://api.wandb.ai
+
