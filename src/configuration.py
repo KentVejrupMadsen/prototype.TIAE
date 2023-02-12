@@ -7,8 +7,6 @@ from os.path \
 from src.secure.setup_secure_random \
     import get_randomizer
 
-import sys
-
 global_configuration = None
 seed = 0
 
@@ -48,7 +46,7 @@ def get_seed() -> int:
     if seed == 0:
         seed = get_randomizer().randint(
             1,
-            sys.maxsize - 2
+            4294967295
         )
 
         print(
@@ -94,11 +92,126 @@ def get_global_configuration() -> dict:
     return global_configuration
 
 
+def get_epochs():
+    return get_global_configuration()[
+        'training'
+    ][
+        'epoch'
+    ]
+
+
 def get_categories():
     global categories
     return categories
 
 
-def set_categories(value):
+def set_categories(
+        value
+):
     global categories
     categories = value
+
+
+def path_to_training_dataset() -> str:
+    return \
+        join(
+            get_global_configuration()['dataset']['root'],
+            get_global_configuration()['dataset']['train']['path']
+        )
+
+
+def get_validation_split() -> float:
+    return get_global_configuration()[
+        'training'
+    ][
+        'validation'
+    ]
+
+
+def get_image_size() -> tuple:
+    return     \
+        get_image_width_size(),  \
+        get_image_height_size()
+
+
+def get_image_width_size() -> int:
+    return get_global_configuration()[
+        'training'
+    ][
+        'image'
+    ][
+        'width'
+    ]
+
+
+def get_image_height_size() -> int:
+    return get_global_configuration()[
+        'training'
+    ][
+        'image'
+    ][
+        'height'
+    ]
+
+
+def get_batch_size() -> int:
+    return get_global_configuration()[
+        'training'
+    ][
+        'batch_size'
+    ]
+
+
+def get_spectrum() -> str:
+    return get_global_configuration()[
+        'training'
+    ][
+        'image'
+    ][
+        'spectrum'
+    ]
+
+
+def get_option_crop_aspect_ratio() -> bool:
+    return get_global_configuration()[
+        'training'
+    ][
+        'image'
+    ][
+        'options'
+    ][
+        'keep_aspect_ratio'
+    ]
+
+
+def get_option_shuffle() -> bool:
+    return get_global_configuration()[
+        'training'
+    ][
+        'image'
+    ][
+        'options'
+    ][
+        'shuffle'
+    ]
+
+
+def get_train_path() -> str:
+    return get_global_configuration()[
+        'dataset'
+    ][
+        'train'
+    ][
+        'path'
+    ]
+
+
+def get_update_state() -> bool:
+    r = get_global_configuration()[
+        'dataset'
+    ][
+        'updatable'
+    ]
+
+    return r
+

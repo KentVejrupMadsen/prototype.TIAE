@@ -1,37 +1,46 @@
 {
     "training":
         {
-            "epoch": 32,
-            "batch_size": 4,
+            "epoch": 2,
+            "batch_size": 1,
+
             "image":
                 {
-                    "width": 512,
-                    "height": 512,
+                    "width": 200,
+                    "height": 200,
+
                     "spectrum": "rgb",
                     "options":
                     {
                         "keep_aspect_ratio": true,
                         "to_gray_scale": false,
-                        "shuffle": false
+                        "shuffle": true
                     }
                 },
-            "validation": 0.5
+
+            "validation": 0.25
         },
 
     "dataset":
         {
-            "updatable": true,
+            "updatable": false,
+
+            "root": "/mnt/c/DataSets/BigDataSet/",
 
             "train":
                 {
-                    "path": "/mnt/c/DataSets/Threat-identifications/Dataset/Train"
+                    "path": "dataset"
                 },
 
             "test":
                 {
-                    "path": "/mnt/c/DataSets/Threat-identifications/Dataset/Test"
+                    "path": "Test"
                 }
         },
 
-    "": ""
+    "tf":
+    {
+        "path": "/tmp/tiae.tf",
+        "checkpoint": "/tmp/checkpoint"
+    }
 }

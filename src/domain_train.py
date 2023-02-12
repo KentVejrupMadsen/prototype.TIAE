@@ -11,9 +11,15 @@ from wandb \
 from src.misc.generate_case_name \
     import generate_case_name
 
-from src.training_script \
+from src.training.training_classification_script \
     import run \
-    as segment_run
+    as classification_run
+
+from src.training.training_classification_script \
+    import \
+    get_value_accuracy, \
+    get_value_loss
+
 
 from src.configuration \
     import \
@@ -32,10 +38,14 @@ class DomainTraining:
 
         wandb_init(
             'tiae',
-            name= generated_case_name,
+            name=generated_case_name,
+
             save_code=True,
+
             group='training',
+
             tensorboard=True,
+
             tags=
             [
                 'alpha',
@@ -44,29 +54,24 @@ class DomainTraining:
                 'testing',
                 'nvidia-gpu'
             ],
+
             notes='domain used for training the algorithm'
         )
 
         wandb.log(
-            get_global_configuration()
-        )
-
-        wandb.log(
             {
+                'configuration': get_global_configuration(),
+                'classes': get_categories(),
                 'seed': get_seed()
             }
         )
 
         load_dataset()
 
-        wandb.log(
-            {
-                'classes': get_categories()
-            }
-        )
-
     def test(self):
-        segment_run()
+        classification_run()
 
     def done(self):
         wandb_finished()
+
+

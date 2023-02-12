@@ -1,17 +1,11 @@
 from src.configuration \
-    import get_global_configuration
+    import \
+    get_global_configuration, \
+    get_update_state, \
+    get_train_path
 
 import os
 import wandb
-
-
-def get_train_path() -> str:
-    return get_global_configuration()['dataset']['train']['path']
-
-
-def get_update_state() -> bool:
-    r = get_global_configuration()['dataset']['updatable']
-    return r
 
 
 def load_from_wandb():

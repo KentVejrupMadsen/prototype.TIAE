@@ -4,15 +4,36 @@ from keras.utils \
 from tensorflow.python.data \
     import AUTOTUNE
 
+from src.CallbackFactory \
+    import CallbackFactory
+
 from src.configuration \
     import \
-    get_global_configuration, \
     get_seed, \
     get_training_dataset, \
     get_validation_dataset, \
     set_training_dataset, \
     set_validation_dataset, \
-    set_categories
+    set_categories, \
+    path_to_training_dataset, \
+    get_validation_split, \
+    get_image_size, \
+    get_batch_size, \
+    get_spectrum, \
+    get_option_crop_aspect_ratio, \
+    get_option_shuffle, \
+    get_global_configuration
+
+
+from src.training.classifying_model \
+    import Classify
+
+import wandb
+
+model = None
+
+accuracy = None
+loss = None
 
 
 def run():
@@ -68,42 +89,66 @@ def generate_datasets():
 
 
 def generate_network():
-    pass
+    global model
+    model = Classify(
+        training=get_training_dataset(),
+        validation=get_validation_dataset()
+    )
 
 
 def generate_train():
-    pass
+    factory = CallbackFactory(
+        get_classify_model()
+    )
+
+    factory.append_early_stopper()
+    factory.append_checkpoint()
+
+    get_classify_model().fit_model()
+
+    get_classify_model().save(
+        get_global_configuration()['tf']['path']
+    )
+
+    history = get_classify_model().history
+
+    val_loss = history.history['val_loss']
+    val_acc = history.history['val_accuracy']
+
+    set_value_loss(val_loss)
+    set_value_accuracy(val_acc)
+
+    wandb.log(
+        {
+            'history':
+            {
+                'accuracy': get_value_accuracy(),
+                'loss': get_value_loss()
+            },
+        }
+    )
 
 
-def path_to_training_dataset() -> str:
-    return get_global_configuration()['dataset']['train']['path']
+def get_classify_model() -> Classify:
+    global model
+    return model
 
 
-def get_validation_split() -> float:
-    return get_global_configuration()['training']['validation']
+def set_value_accuracy(value):
+    global accuracy
+    accuracy = value
 
 
-def get_image_size() -> tuple:
-    width = get_global_configuration()['training']['image']['width']
-    height = get_global_configuration()['training']['image']['height']
-
-    return     \
-        width,  \
-        height
+def get_value_accuracy():
+    global accuracy
+    return accuracy
 
 
-def get_batch_size() -> int:
-    return get_global_configuration()['training']['batch_size']
+def set_value_loss(value):
+    global loss
+    loss = value
 
 
-def get_spectrum() -> str:
-    return get_global_configuration()['training']['image']['spectrum']
-
-
-def get_option_crop_aspect_ratio() -> bool:
-    return get_global_configuration()['training']['image']['options']['keep_aspect_ratio']
-
-
-def get_option_shuffle() -> bool:
-    return get_global_configuration()['training']['image']['options']['shuffle']
-
+def get_value_loss():
+    global loss
+    return loss

@@ -12,8 +12,10 @@ class DomainTesting:
         wandb_init(
             'tiae',
             save_code=True,
+
             group='testing',
             tensorboard=True,
+
             tags=
             [
                 'alpha',
@@ -22,6 +24,7 @@ class DomainTesting:
                 'testing',
                 'nvidia-gpu'
             ],
+
             notes='domain used for testing the algorithms capacity for prediction certain categories.'
         )
 
