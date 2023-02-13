@@ -5,7 +5,7 @@ from src.ai.training \
     import run \
     as classification_run
 
-from src.logging.load_dataset \
+from src.extensions.wandb.artifacts \
     import load \
     as load_dataset
 

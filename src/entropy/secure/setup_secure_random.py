@@ -3,6 +3,13 @@ import random
 random_generator = None
 
 
+def set_randomizer(
+        generator: random.SystemRandom
+) -> None:
+    global random_generator
+    random_generator = generator
+
+
 def get_randomizer() -> random.SystemRandom:
     global random_generator
 
@@ -14,6 +21,9 @@ def get_randomizer() -> random.SystemRandom:
 
 def setup() -> None:
     global random_generator
-    random_generator = random.SystemRandom()
+
+    set_randomizer(
+        random.SystemRandom()
+    )
 
 
