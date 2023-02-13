@@ -4,16 +4,16 @@ from keras.callbacks \
     ModelCheckpoint
 
 from src.training.classifying_model \
-    import Classify
+    import ClassifyModel
 
-from src.configuration \
+from src.state.configuration \
     import get_global_configuration
 
 
 class CallbackFactory:
     def __init__(
             self,
-            model: Classify
+            model: ClassifyModel
     ):
         self.model = model
 

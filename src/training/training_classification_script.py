@@ -7,7 +7,7 @@ from tensorflow.python.data \
 from src.callbacks.CallbackFactory \
     import CallbackFactory
 
-from src.configuration \
+from src.state.configuration \
     import \
     get_seed, \
     get_training_dataset, \
@@ -26,7 +26,7 @@ from src.configuration \
     get_categories
 
 from src.training.classifying_model \
-    import Classify
+    import ClassifyModel
 
 import wandb
 
@@ -87,7 +87,7 @@ def generate_datasets():
 
 def generate_network():
     global model
-    model = Classify(
+    model = ClassifyModel(
         training=get_training_dataset(),
         validation=get_validation_dataset()
     )
@@ -159,6 +159,6 @@ def generate_train():
     )
 
 
-def get_classify_model() -> Classify:
+def get_classify_model() -> ClassifyModel:
     global model
     return model

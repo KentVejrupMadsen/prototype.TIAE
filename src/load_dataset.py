@@ -1,4 +1,4 @@
-from src.configuration \
+from src.state.configuration \
     import \
     get_update_state, \
     get_train_path

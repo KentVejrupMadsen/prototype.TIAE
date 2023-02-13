@@ -16,7 +16,7 @@ from src.training.training_classification_script \
     as classification_run
 
 
-from src.configuration \
+from src.state.configuration \
     import \
     get_global_configuration, \
     get_seed

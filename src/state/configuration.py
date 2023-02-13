@@ -49,12 +49,6 @@ def get_seed() -> int:
             4294967295
         )
 
-        print(
-            str(
-                seed
-            )
-        )
-
     return seed
 
 
@@ -70,10 +64,17 @@ def load_configuration():
 
     path_to_config = join(
         os.getcwd(),
-        'config.json'
+        'configurations'
     )
 
-    open_file = open(path_to_config)
+    path_to_config = join(
+        path_to_config,
+        '../../configurations/config.json'
+    )
+
+    open_file = open(
+        path_to_config
+    )
 
     loaded_data = json.load(
         open_file
