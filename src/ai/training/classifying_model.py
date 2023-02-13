@@ -14,9 +14,9 @@ from src.state.configuration \
     import \
     get_epochs, \
     get_global_configuration
-from src.training.network.generate_middle_network import generate_middle_layer
+from src.ai.training.network.generate_middle_network import generate_middle_layer
 
-from src.training.network.in_out_network \
+from src.ai.training.network.in_out_network \
     import generate_output, generate_input
 
 

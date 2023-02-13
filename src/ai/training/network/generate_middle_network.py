@@ -1,7 +1,7 @@
 from keras.layers import Dense, Flatten, MaxPooling2D, Conv2D
 
 from src.state.configuration import get_image_height_size
-from src.training.classifying_model \
+from src.ai.training.classifying_model \
     import ClassifyModel
 
 middle_layer_size = 6

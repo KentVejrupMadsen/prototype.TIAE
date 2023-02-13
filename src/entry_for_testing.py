@@ -1,7 +1,7 @@
-from src.domain_testing \
+from src.ai.domain_testing \
     import DomainTesting
 
-from src.secure.setup_secure_random \
+from src.entropy.secure.setup_secure_random \
     import setup \
     as secure_randomizers
 

@@ -9,7 +9,7 @@ from src.state.configuration \
     get_spectrum, \
     get_batch_size
 
-from src.training.classifying_model \
+from src.ai.training.classifying_model \
     import ClassifyModel
 
 

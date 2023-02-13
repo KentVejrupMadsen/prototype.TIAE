@@ -4,7 +4,7 @@ import os
 from os.path \
     import join
 
-from src.secure.setup_secure_random \
+from src.entropy.secure \
     import get_randomizer
 
 global_configuration = None

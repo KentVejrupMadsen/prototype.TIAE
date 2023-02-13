@@ -3,7 +3,7 @@ from keras.callbacks \
     EarlyStopping, \
     ModelCheckpoint
 
-from src.training.classifying_model \
+from src.ai.training.classifying_model \
     import ClassifyModel
 
 from src.state.configuration \

@@ -4,7 +4,7 @@ from keras.utils \
 from tensorflow.python.data \
     import AUTOTUNE
 
-from src.callbacks.CallbackFactory \
+from src.ai.callbacks.callback_factory \
     import CallbackFactory
 
 from src.state.configuration \
@@ -25,7 +25,7 @@ from src.state.configuration \
     get_global_configuration, \
     get_categories
 
-from src.training.classifying_model \
+from src.ai.training.classifying_model \
     import ClassifyModel
 
 import wandb
