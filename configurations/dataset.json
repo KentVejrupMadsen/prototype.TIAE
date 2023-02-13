@@ -11,5 +11,7 @@
       "test",
       "predict"
     ]
-  }
+  },
+  "workspace": "datasets",
+  "location": "internal"
 }
