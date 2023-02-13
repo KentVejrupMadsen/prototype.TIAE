@@ -6,8 +6,11 @@
           "dataset.json",
           "tensorflow.json",
           "training.json",
-          "network.json"
+          "network.json",
+          "gpu.nvidia.json",
+          "wandb.json"
         ],
+
       "dictionaries":
         [
           "production.json",

@@ -1,22 +1,9 @@
-from os.path \
-    import \
-    realpath, \
-    dirname
-
-
 class ConfigurationManager:
     def __init__(self):
         self.configuration_path = None
-        self.get_script_location()
+        self.configurations = []
 
         self.__debug()
-
-    def get_script_location(self):
-        self.configuration_path = dirname(
-            realpath(
-                __file__
-            )
-        )
 
     def get_path(self) -> str:
         return self.configuration_path
@@ -27,13 +14,33 @@ class ConfigurationManager:
     ) -> None:
         self.configuration_path = value
 
+    def get_configurations(self) -> list:
+        return self.configurations
+
+    def set_configurations(
+            self,
+            value: list
+    ) -> None:
+        self.configurations = value
+
     def __debug(self):
         print('configuration.')
 
         if not (
                 self.configuration_path is None
         ):
-            print('path:', self.configuration_path)
+            print(
+                'path:',
+                self.configuration_path
+            )
+
+    def __sizeof__(self):
+        return len(
+            self.configurations
+        )
+
+    def __str__(self):
+        return "configuration manager"
 
 
 # Singleton object. used globally
