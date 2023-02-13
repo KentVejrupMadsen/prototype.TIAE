@@ -1,0 +1,18 @@
+{
+  "dataset":
+  {
+    "updatable": false,
+
+    "root": "/mnt/c/DataSets/Games",
+
+    "train":
+    {
+      "path": "dataset"
+    },
+
+    "test":
+    {
+      "path": "Test"
+    }
+  }
+}

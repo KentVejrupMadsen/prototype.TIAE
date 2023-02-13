@@ -21,9 +21,12 @@ from src.state.configuration \
     get_global_configuration, \
     get_seed
 
-from src.load_dataset \
+from src.logging.load_dataset \
     import load \
     as load_dataset
+
+from src.logging.log \
+    import log_values
 
 
 class DomainTraining:
@@ -52,19 +55,22 @@ class DomainTraining:
             notes='domain used for training the algorithm'
         )
 
-        wandb.log(
-            {
-                'configuration': get_global_configuration(),
-                'seed': get_seed()
-            }
-        )
-
+    def execute(self):
         load_dataset()
+        self.test()
+        self.log_test_result()
 
     def test(self):
         classification_run()
 
+    def log_test_result(self):
+        log_values(
+            'seed', get_seed()
+        )
+        log_values(
+            'configuration',
+            get_global_configuration()
+        )
+
     def done(self):
         wandb_finished()
-
-

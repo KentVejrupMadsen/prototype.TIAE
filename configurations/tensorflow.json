@@ -1,0 +1,7 @@
+{
+  "tensorflow":
+    {
+        "path": "/tmp/tiae.tf/",
+        "checkpoint": "/tmp/checkpoint/"
+    }
+}

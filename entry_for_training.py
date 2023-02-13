@@ -38,7 +38,7 @@ setup()
 
 def main() -> None:
     domain = DomainTraining()
-    domain.test()
+    domain.execute()
     domain.done()
 
 

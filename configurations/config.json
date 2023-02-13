@@ -19,28 +19,5 @@
                 },
 
             "validation": 0.25
-        },
-
-    "dataset":
-        {
-            "updatable": false,
-
-            "root": "/mnt/c/DataSets/BigDataSet/",
-
-            "train":
-                {
-                    "path": "dataset"
-                },
-
-            "test":
-                {
-                    "path": "Test"
-                }
-        },
-
-    "tf":
-    {
-        "path": "/tmp/tiae.tf/",
-        "checkpoint": "/tmp/checkpoint/"
-    }
+        }
 }
