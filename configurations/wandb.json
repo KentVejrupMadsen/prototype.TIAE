@@ -1,0 +1,17 @@
+{
+  "wandb":
+  {
+      "project":
+      {
+        "name": "",
+        "notes": "",
+
+        "tags":
+        [
+
+        ],
+
+        "group": "training"
+      }
+  }
+}

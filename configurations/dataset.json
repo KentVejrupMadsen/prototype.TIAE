@@ -6,8 +6,6 @@
       "synchronize": false
     },
 
-    "root": "/mnt/c/DataSets/Games",
-
     "sets": [
       "train",
       "test",
