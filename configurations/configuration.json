@@ -1,0 +1,26 @@
+{
+    "configuration":
+    {
+      "project":
+      {
+        "name": "",
+        "notes": "",
+        "tags":
+        [
+
+        ],
+        "": ""
+      },
+      "include":
+            [
+              "dataset.json",
+              "tensorflow.json",
+              "training.json",
+              "network.json"
+            ],
+      "dictionaries":
+      [
+        ""
+      ]
+    }
+}

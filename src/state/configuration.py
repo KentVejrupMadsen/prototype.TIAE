@@ -69,7 +69,7 @@ def load_configuration():
 
     path_to_config = join(
         path_to_config,
-        '../../configurations/config.json'
+        '../../configurations/configuration.json'
     )
 
     open_file = open(
