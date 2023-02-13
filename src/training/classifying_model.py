@@ -16,7 +16,9 @@ import os
 
 from keras.losses \
     import SparseCategoricalCrossentropy
-from keras.optimizers import Adam
+
+from keras.optimizers \
+    import Adam
 
 from src.configuration \
     import \
@@ -26,10 +28,7 @@ from src.configuration \
     get_categories, \
     get_batch_size, \
     get_epochs, \
-    get_seed, \
     get_global_configuration
-
-
 
 
 class Classify:

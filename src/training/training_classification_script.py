@@ -4,7 +4,7 @@ from keras.utils \
 from tensorflow.python.data \
     import AUTOTUNE
 
-from src.CallbackFactory \
+from src.callbacks.CallbackFactory \
     import CallbackFactory
 
 from src.configuration \
@@ -22,8 +22,8 @@ from src.configuration \
     get_spectrum, \
     get_option_crop_aspect_ratio, \
     get_option_shuffle, \
-    get_global_configuration
-
+    get_global_configuration, \
+    get_categories
 
 from src.training.classifying_model \
     import Classify
@@ -31,9 +31,6 @@ from src.training.classifying_model \
 import wandb
 
 model = None
-
-accuracy = None
-loss = None
 
 
 def run():
@@ -96,6 +93,16 @@ def generate_network():
     )
 
 
+def generate_indexes(
+        size_of_index: int
+) -> list:
+    r_values = []
+    for i in range(0, size_of_index):
+        r_values.append((i + 1))
+
+    return r_values
+
+
 def generate_train():
     factory = CallbackFactory(
         get_classify_model()
@@ -115,15 +122,38 @@ def generate_train():
     val_loss = history.history['val_loss']
     val_acc = history.history['val_accuracy']
 
-    set_value_loss(val_loss)
-    set_value_accuracy(val_acc)
+    accuracy = history.history['accuracy']
+    loss = history.history['loss']
 
     wandb.log(
         {
+            'classes':
+                {
+                    'labels': get_categories()
+                },
             'history':
             {
-                'accuracy': get_value_accuracy(),
-                'loss': get_value_loss()
+                'values':
+                    {
+                        'accuracy':
+                            {
+                                'values': val_acc,
+                            },
+                        'loss':
+                            {
+                                'values': val_loss,
+                            }
+                    },
+
+                'accuracy':
+                    {
+                        'values': accuracy,
+                    },
+
+                'loss':
+                    {
+                        'values': loss,
+                    }
             },
         }
     )
@@ -132,23 +162,3 @@ def generate_train():
 def get_classify_model() -> Classify:
     global model
     return model
-
-
-def set_value_accuracy(value):
-    global accuracy
-    accuracy = value
-
-
-def get_value_accuracy():
-    global accuracy
-    return accuracy
-
-
-def set_value_loss(value):
-    global loss
-    loss = value
-
-
-def get_value_loss():
-    global loss
-    return loss

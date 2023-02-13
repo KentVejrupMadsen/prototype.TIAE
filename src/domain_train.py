@@ -15,16 +15,10 @@ from src.training.training_classification_script \
     import run \
     as classification_run
 
-from src.training.training_classification_script \
-    import \
-    get_value_accuracy, \
-    get_value_loss
-
 
 from src.configuration \
     import \
     get_global_configuration, \
-    get_categories, \
     get_seed
 
 from src.load_dataset \
@@ -37,7 +31,7 @@ class DomainTraining:
         generated_case_name = generate_case_name()
 
         wandb_init(
-            'tiae',
+            'training_test',
             name=generated_case_name,
 
             save_code=True,
@@ -61,7 +55,6 @@ class DomainTraining:
         wandb.log(
             {
                 'configuration': get_global_configuration(),
-                'classes': get_categories(),
                 'seed': get_seed()
             }
         )

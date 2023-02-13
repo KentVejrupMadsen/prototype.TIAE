@@ -32,7 +32,15 @@ class CallbackFactory:
         callback = ModelCheckpoint(
             get_global_configuration()
             ['tf']
-            ['checkpoint']
+            ['checkpoint'],
+
+            save_best_only=True,
+            save_weights_only=False,
+
+            monitor='val_accuracy',
+            mode='max',
+
+            verbose=1
         )
 
         self.model.callbacks.append(

@@ -40,7 +40,7 @@
 
     "tf":
     {
-        "path": "/tmp/tiae.tf",
-        "checkpoint": "/tmp/checkpoint"
+        "path": "/tmp/tiae.tf/",
+        "checkpoint": "/tmp/checkpoint/"
     }
 }

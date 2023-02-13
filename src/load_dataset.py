@@ -1,6 +1,5 @@
 from src.configuration \
     import \
-    get_global_configuration, \
     get_update_state, \
     get_train_path
 
