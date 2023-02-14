@@ -1,0 +1,14 @@
+{
+  "tensorflow":
+  {
+  },
+
+  "keras":
+  {
+    "paths":
+    {
+      "checkpoint": "/tmp/checkpoint/",
+      "save_at": "/tmp/tiae.tf/"
+    }
+  }
+}

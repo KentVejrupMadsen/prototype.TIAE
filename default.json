@@ -1,0 +1,11 @@
+{
+  "load":
+  [
+    "configurations",
+    "dictionaries"
+  ],
+  "apply":
+  {
+
+  }
+}

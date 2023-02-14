@@ -1,0 +1,17 @@
+{
+  "dataset":
+  {
+    "wandb":
+    {
+      "synchronize": false
+    },
+
+    "sets": [
+      "train",
+      "test",
+      "predict"
+    ]
+  },
+  "workspace": "datasets",
+  "location": "internal"
+}

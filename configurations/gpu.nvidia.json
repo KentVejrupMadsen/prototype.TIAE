@@ -1,0 +1,21 @@
+{
+  "general":
+  {
+    "use": true
+  },
+
+  "gpus":
+  {
+    "nvidia":
+    {
+      "number_of": null,
+
+      "limit":
+      {
+        "memory": 4080
+      },
+
+      "growth": true
+    }
+  }
+}

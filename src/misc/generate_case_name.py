@@ -1,11 +1,12 @@
-from src.misc.list_of_names \
-    import get_dictionary
-
-from src.secure.setup_secure_random \
+from src.entropy.secure \
     import get_randomizer
 
 from datetime \
     import date
+
+
+def get_dictionary():
+    return {}
 
 
 def generate_case_name(
