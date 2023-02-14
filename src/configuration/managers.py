@@ -1,8 +1,9 @@
-from configuration.managers.dictionary_manager \
+from configuration.management.configuration_manager \
+    import ConfigurationManager
+
+from configuration.management.dictionary_manager \
     import DictionaryManager
 
-from configuration.managers.configuration_manager \
-    import ConfigurationManager
 
 # Singleton object. used globally
 singleton_configuration_manager = None

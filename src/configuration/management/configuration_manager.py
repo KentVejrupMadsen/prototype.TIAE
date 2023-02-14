@@ -1,7 +1,7 @@
-from configuration.managers.configuration \
+from configuration.management.entities.configuration \
     import Configuration
 
-from configuration.managers.utils \
+from configuration.management.utils \
     import loader_for_configuration_setup
 
 from configuration.globals \

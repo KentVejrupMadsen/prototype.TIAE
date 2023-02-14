@@ -1,4 +1,4 @@
-from configuration.managers.utils \
+from configuration.management.utils \
     import loader_for_dictionary_setup
 
 from configuration.globals \

@@ -6,10 +6,10 @@ from os.path \
 
 import json
 
-from configuration.managers.configuration \
+from configuration.management.entities.configuration \
     import Configuration
 
-from configuration.managers.dictionary \
+from configuration.management.entities.dictionary \
     import Dictionary
 
 cache = None
@@ -22,7 +22,7 @@ def load_cache(
 
     result_path = join(
         configuration_path,
-        '../../../configuration.json'
+        'configuration.json'
     )
 
     if exists(result_path) and \
