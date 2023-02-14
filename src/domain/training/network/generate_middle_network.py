@@ -1,7 +1,6 @@
 from keras.layers import Dense, Flatten, MaxPooling2D, Conv2D
 
-from src.state.configuration import get_image_height_size
-from src.ai.training.classifying_model \
+from src.domain.training.classifying_model \
     import ClassifyModel
 
 middle_layer_size = 6
@@ -15,7 +14,7 @@ def get_middle_layer_size() -> int:
 def generate_middle_layer(
         model: ClassifyModel
 ):
-        min_height = get_image_height_size()
+        min_height = 256
 
         first_layer_in_mid = Conv2D(
             min_height,

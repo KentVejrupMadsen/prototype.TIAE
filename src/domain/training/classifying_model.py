@@ -10,14 +10,13 @@ from keras.losses \
 from keras.optimizers \
     import Adam
 
-from src.state.configuration \
-    import \
-    get_epochs, \
-    get_global_configuration
-from src.ai.training.network.generate_middle_network import generate_middle_layer
+from src.domain.training.network.generate_middle_network \
+    import generate_middle_layer
 
-from src.ai.training.network.in_out_network \
-    import generate_output, generate_input
+from src.domain.training.network.in_out_network \
+    import \
+    generate_output, \
+    generate_input
 
 
 class ClassifyModel:
@@ -67,14 +66,14 @@ class ClassifyModel:
         history = self.get_model().fit(
             self.get_train_set(),
             validation_data=self.get_validation_set(),
-            epochs=get_epochs(),
+            epochs=5,
             callbacks=self.callbacks
         )
 
         self.history = history
 
     def _load_old_weights(self):
-        path = get_global_configuration()['tf']['checkpoint']
+        path = '/mnt/checkpoint'
 
         is_dir = os.path.isdir(
             path
@@ -146,6 +145,3 @@ class ClassifyModel:
 
     def get_train_set(self):
         return self.training
-
-
-

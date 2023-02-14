@@ -1,12 +1,27 @@
 from configuration.globals \
-    import setup, get_repository_path, get_source_path
+    import \
+    setup
 
-from configuration.managers import get_singleton_configuration_manager
+from configuration.managers \
+    import get_singleton_configuration_manager
+
+from configuration.managers \
+    import get_singleton_dictionary_manager
+
+from application \
+    import Application
+
+
+def load() -> None:
+    cfg_manager = get_singleton_configuration_manager()
+    dict_mng = get_singleton_dictionary_manager()
 
 
 def main() -> None:
     setup(__file__)
-    cfg_manager = get_singleton_configuration_manager()
+    load()
+
+    app = Application()
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-from src.ai.domain_testing \
+from src.domain.domain_testing \
     import DomainTesting
 
 
