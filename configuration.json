@@ -1,4 +1,6 @@
 {
+    "type": "load",
+
     "configuration":
     {
       "include":
