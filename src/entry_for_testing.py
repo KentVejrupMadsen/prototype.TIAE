@@ -1,9 +1,9 @@
-from src.domain.domain_testing \
-    import DomainTesting
+from src.domain.testing \
+    import Testing
 
 
 def main():
-    domain = DomainTesting()
+    domain = Testing()
 
 
     domain.done()

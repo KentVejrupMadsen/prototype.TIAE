@@ -6,7 +6,7 @@ from src.extensions.wandb.artifacts \
     as load_dataset
 
 
-class DomainTraining:
+class Training:
     def __init__(self):
         generated_case_name = generate_case_name()
 

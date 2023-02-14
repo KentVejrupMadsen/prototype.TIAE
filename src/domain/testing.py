@@ -7,7 +7,7 @@ from wandb \
     as wandb_finished
 
 
-class DomainTesting:
+class Testing:
     def __init__(self):
         wandb_init(
             'tiae',
@@ -30,6 +30,3 @@ class DomainTesting:
 
     def done(self):
         wandb_finished()
-
-
-
