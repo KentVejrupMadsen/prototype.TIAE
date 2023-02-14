@@ -1,7 +1,7 @@
 from configuration.globals \
     import setup, get_repository_path, get_source_path
 
-from configuration.manager \
+from configuration.managers \
     import ConfigurationManager
 
 

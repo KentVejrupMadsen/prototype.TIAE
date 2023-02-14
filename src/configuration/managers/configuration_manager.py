@@ -1,34 +1,45 @@
-from configuration.configuration \
+from configuration.managers.configuration \
     import Configuration
 
-from configuration.utils \
-    import \
-    loader_for_configuration_setup, \
-    loader_for_dictionary_setup
+from configuration.managers.utils \
+    import loader_for_configuration_setup
 
 from configuration.globals \
     import get_repository_path
 
 
+def is_zero(
+        value: int
+) -> bool:
+    return value == 0
+
+
+def is_str_empty(
+        value: str
+) -> bool:
+    return is_zero(
+        len(value)
+    )
+
+
 class ConfigurationManager:
     def __init__(
             self,
-            configuration_path: str = get_repository_path()
+            configuration_path: str = ''
     ):
         self.configuration_path = configuration_path
-        self.configurations = [
+        self.configurations = []
 
-        ]
+        if is_str_empty(
+                self.configuration_path
+        ):
+            self.configuration_path = get_repository_path()
 
         self.__debug()
         self.__load__()
 
     def __load__(self):
-        loader_for_configuration_setup(
-            self.get_path()
-        )
-
-        loader_for_dictionary_setup(
+        self.configurations = loader_for_configuration_setup(
             self.get_path()
         )
 
@@ -124,26 +135,3 @@ class ConfigurationManager:
 
     def __str__(self):
         return "configuration manager"
-
-
-# Singleton object. used globally
-singleton = None
-
-
-def get_singleton() -> ConfigurationManager:
-    global singleton
-
-    if singleton is None:
-        set_singleton(
-            ConfigurationManager()
-        )
-
-    return singleton
-
-
-def set_singleton(
-        value: ConfigurationManager
-) -> None:
-    global singleton
-    singleton = value
-

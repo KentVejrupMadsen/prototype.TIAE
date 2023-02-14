@@ -6,13 +6,33 @@ from os.path \
 
 import json
 
-from configuration.configuration \
+from configuration.managers.configuration \
     import Configuration
 
-from configuration.dictionary \
+from configuration.managers.dictionary \
     import Dictionary
 
 cache = None
+
+
+def load_cache(
+        configuration_path: str
+) -> None:
+    global cache
+
+    result_path = join(
+        configuration_path,
+        '../../../configuration.json'
+    )
+
+    if exists(result_path) and \
+       isfile(result_path) and \
+            cache is None:
+        f = open(result_path)
+        data = json.load(f)
+        f.close()
+
+        cache = data
 
 
 def loader_for_configuration_setup(
@@ -20,22 +40,11 @@ def loader_for_configuration_setup(
 ) -> list:
     global cache
 
-    result = join(
-        configuration_path,
-        'configuration.json'
-    )
-
     result_variables = []
-    data = None
 
-    if exists(result) and \
-       isfile(result) and \
-            cache is None:
-        f = open(result)
-        data = json.load(f)
-        f.close()
-
-        cache = data
+    load_cache(
+        configuration_path
+    )
 
     if has_data(cache):
         setup_configuration(
@@ -77,19 +86,6 @@ def setup_configuration(
     return return_values
 
 
-def load_configurations(
-        path_to_file: str,
-        return_values: list
-):
-    configuration = Configuration(
-            path_to_configuration=path_to_file
-    )
-
-    return_values.append(
-        configuration
-    )
-
-
 def has_data(
         values: dict
 ) -> bool:
@@ -105,26 +101,15 @@ def loader_for_dictionary_setup(
 ) -> list:
     global cache
 
-    full_path = join(
-        configuration_path,
-        'configuration.json'
-    )
-
     result_variables = []
-    data = None
 
-    if exists(full_path) and \
-       isfile(full_path) and \
-            cache is None:
-        f = open(full_path)
-        data = json.load(f)
-        f.close()
-
-        cache = data
+    load_cache(
+        configuration_path
+    )
 
     if has_data(cache):
         setup_dictionary(
-            data,
+            cache,
             result_variables,
             configuration_path
         )
@@ -137,10 +122,10 @@ def setup_dictionary(
         result_variables: list,
         configuration_path: str
 ):
-
     if 'configuration' in data:
-        if 'dictionaries' in data:
+        if 'dictionaries' in data['configuration']:
             dictionaries = data['configuration']['dictionaries']
+            print('found dictionaries:', dictionaries)
 
             for e in dictionaries:
                 final = join(
@@ -162,6 +147,20 @@ def load_dictionaries(
         path_to_dictionary=path_to_file
     )
 
-    retValues.append(path_to_file)
+    retValues.append(
+        dictionary
+    )
 
+
+def load_configurations(
+        path_to_file: str,
+        return_values: list
+):
+    configuration = Configuration(
+            path_to_configuration=path_to_file
+    )
+
+    return_values.append(
+        configuration
+    )
 
