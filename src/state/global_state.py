@@ -4,7 +4,6 @@ from entropy.secure.setup_secure_random \
 from configuration.counter \
     import Counter
 
-
 current_run_seed = None
 seed_accessed = Counter()
 
@@ -12,6 +11,95 @@ seed_min = 1
 seed_max = 4294967295
 
 seed_reset_boundary = 200
+
+update_dataset_online = False
+validation_split = 0.2
+
+batch_size = 32
+
+standard_image_size = (256, 256)
+categories = None
+
+validation_dataset = None
+training_dataset = None
+
+
+def get_training_dataset():
+    global training_dataset
+    return training_dataset
+
+
+def set_training_dataset(
+        values
+):
+    global training_dataset
+    training_dataset = values
+
+
+def get_validation_dataset():
+    global validation_dataset
+    return validation_dataset
+
+
+def set_validation_dataset(
+        values
+):
+    global validation_dataset
+    validation_dataset = values
+
+
+def get_categories():
+    global categories
+    return categories
+
+
+def set_categories(
+        values
+):
+    global categories
+    categories = values
+
+
+def get_standard_image_size() -> tuple:
+    global standard_image_size
+    return standard_image_size
+
+
+def set_standard_image_size(
+        value: tuple
+) -> None:
+    global standard_image_size
+    standard_image_size = value
+
+
+def get_batch_size() -> int:
+    global batch_size
+    return batch_size
+
+
+def set_batch_size(value: int) -> None:
+    global batch_size
+    batch_size = value
+
+
+def get_validation_split() -> float:
+    global validation_split
+    return validation_split
+
+
+def set_validation_split(value: float) -> None:
+    global validation_split
+    validation_split = value
+
+
+def get_update_dateset_online() -> bool:
+    global update_dataset_online
+    return update_dataset_online
+
+
+def set_update_dataset_online(value: bool) -> None:
+    global update_dataset_online
+    update_dataset_online = value
 
 
 def get_reset_boundary() -> int:
@@ -86,15 +174,15 @@ def set_seed(
     current_run_seed = value
 
 
-train_path = None
+train_path = r'/mnt/c/Workspace/TIAE/datasets/training-set'
 
 
-def get_train_path() -> str:
+def get_path_to_training_dataset() -> str:
     global train_path
     return train_path
 
 
-def set_train_path(
+def set_path_to_training_dataset(
         value: str
 ) -> None:
     global train_path
@@ -104,11 +192,13 @@ def set_train_path(
 validate_path = None
 
 
-def get_dataset_validation() -> str:
+def get_path_to_validation_dataset() -> str:
     global validate_path
     return validate_path
 
 
-def set_dataset_validation(value: str) -> None:
+def set_path_to_validation_dataset(
+        value: str
+) -> None:
     global validate_path
     validate_path = value

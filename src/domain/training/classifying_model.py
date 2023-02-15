@@ -13,7 +13,7 @@ from keras.optimizers \
 from src.domain.training.network.generate_middle_network \
     import generate_middle_layer
 
-from src.domain.training.network.in_out_network \
+from src.domain.training.network.generate_in_out_network \
     import \
     generate_output, \
     generate_input
@@ -40,6 +40,12 @@ class ClassifyModel:
         self.__make_model()
         self.is_training = True
 
+        self.epoch = 5,
+        self.learning_rate = 0.002
+
+        self.debug: bool = False
+        self.expand: bool = True
+
     def __make_model(self):
         generate_input(self)
         generate_middle_layer(self)
@@ -50,11 +56,11 @@ class ClassifyModel:
     def _compile(self):
         self.get_model().compile(
             optimizer=Adam(
-                learning_rate=0.002
+                learning_rate=self.learning_rate
             ),
 
             loss=SparseCategoricalCrossentropy(
-                from_logits=True
+                from_logits=True,
             ),
 
             metrics=[
@@ -66,7 +72,7 @@ class ClassifyModel:
         history = self.get_model().fit(
             self.get_train_set(),
             validation_data=self.get_validation_set(),
-            epochs=5,
+            epochs=self.epoch,
             callbacks=self.callbacks
         )
 
@@ -81,13 +87,13 @@ class ClassifyModel:
 
         if is_dir:
             print('found checkpoint directory.')
-            l = len(
+            number_of_files_in_directory = len(
                 os.listdir(
                     path
                 )
             )
 
-            if l > 0:
+            if number_of_files_in_directory > 0:
                 print('found checkpoint weights')
 
                 self.load_saved_model(
@@ -104,11 +110,17 @@ class ClassifyModel:
         self._compile()
 
         self.get_model().summary(
-            show_trainable=True,
-            expand_nested=True
+            show_trainable=self.show_trainable(),
+            expand_nested=self.expand
         )
 
         self._load_old_weights()
+
+    def show_trainable(self):
+        if self.debug:
+            return True
+        else:
+            return False
 
     def save(
             self,

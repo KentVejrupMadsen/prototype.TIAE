@@ -9,6 +9,23 @@ from src.domain.callbacks.callback_factory \
 
 import wandb
 
+from state.global_state \
+    import \
+    get_path_to_training_dataset, \
+    get_validation_split, \
+    get_seed, \
+    get_batch_size, \
+    get_standard_image_size, \
+    get_categories, \
+    set_categories, \
+    set_validation_dataset, \
+    get_validation_dataset, \
+    get_training_dataset, \
+    set_training_dataset
+
+from domain.training.classifying_model \
+    import ClassifyModel
+
 model = None
 
 
@@ -20,15 +37,15 @@ def run():
 
 def generate_datasets():
     train_dataset = image_dataset_from_directory(
-        path_to_training_dataset(),
+        get_path_to_training_dataset(),
         validation_split=get_validation_split(),
         subset='training',
         seed=get_seed(),
-        image_size=get_image_size(),
+        image_size=get_standard_image_size(),
         batch_size=get_batch_size(),
-        color_mode=get_spectrum(),
-        crop_to_aspect_ratio=get_option_crop_aspect_ratio(),
-        shuffle=get_option_shuffle()
+        color_mode='rgba',
+        crop_to_aspect_ratio=True,
+        shuffle=True
     )
 
     train_dataset.cache().prefetch(
@@ -44,15 +61,15 @@ def generate_datasets():
     )
 
     validation_dataset = image_dataset_from_directory(
-        path_to_training_dataset(),
+        get_path_to_training_dataset(),
         validation_split=get_validation_split(),
         subset='validation',
         seed=get_seed(),
-        image_size=get_image_size(),
+        image_size=get_standard_image_size(),
         batch_size=get_batch_size(),
-        color_mode=get_spectrum(),
-        crop_to_aspect_ratio=get_option_crop_aspect_ratio(),
-        shuffle=get_option_shuffle()
+        color_mode='rgba',
+        crop_to_aspect_ratio=True,
+        shuffle=True
     )
 
     validation_dataset.cache().prefetch(
@@ -88,12 +105,12 @@ def generate_train():
     )
 
     factory.append_early_stopper()
-    factory.append_checkpoint()
+    factory.append_checkpoint('')
 
     get_classify_model().fit_model()
 
     get_classify_model().save(
-        get_global_configuration()['tf']['path']
+        ''
     )
 
     history = get_classify_model().history

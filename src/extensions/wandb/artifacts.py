@@ -1,5 +1,7 @@
 from state.global_state \
-    import get_train_path
+    import \
+    get_path_to_training_dataset, \
+    get_update_dateset_online
 
 import os
 import wandb
@@ -21,7 +23,7 @@ def save_to_wandb():
     )
 
     dataset_train.add_dir(
-        get_train_path()
+        get_path_to_training_dataset()
     )
 
     wandb.log_artifact(
@@ -31,9 +33,9 @@ def save_to_wandb():
 
 def load():
     if os.path.isdir(
-        get_train_path()
+        get_path_to_training_dataset()
     ):
-        if get_update_state():
+        if get_update_dateset_online():
             save_to_wandb()
     else:
         load_from_wandb()
