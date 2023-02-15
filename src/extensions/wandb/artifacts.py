@@ -3,6 +3,10 @@ import wandb
 from os.path \
     import isdir
 
+from state import \
+    get_path_to_training_dataset, \
+    get_update_dateset_online
+
 
 def load_from_wandb():
     print(

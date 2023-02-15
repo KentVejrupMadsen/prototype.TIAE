@@ -3,14 +3,11 @@ from keras.callbacks \
     EarlyStopping, \
     ModelCheckpoint
 
-from domain.training \
-    import ClassifyModel
-
 
 class CallbackFactory:
     def __init__(
             self,
-            model: ClassifyModel
+            model
     ):
         self.model = model
 

@@ -1,2 +1,2 @@
-from domain.training.classifying_model \
-    import ClassifyModel
+from domain.training.model \
+    import run

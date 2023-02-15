@@ -1,3 +1,6 @@
+from domain.training.callbacks \
+    import callback_factory
+
 from domain.predict \
     import Prediction
 

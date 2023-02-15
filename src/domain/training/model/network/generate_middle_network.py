@@ -1,3 +1,4 @@
+
 from keras.layers \
     import \
     Dense, \
@@ -5,12 +6,9 @@ from keras.layers \
     MaxPooling2D, \
     Conv2D
 
-from domain.training \
-    import ClassifyModel
-
 
 def generate_middle_layer(
-        model: ClassifyModel,
+        model,
 
         kernel_size: tuple = (3, 3),
         pool_size: tuple = (2, 2),

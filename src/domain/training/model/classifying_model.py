@@ -1,8 +1,11 @@
+from domain.training.model.setup_model \
+    import setup_of_model
+
+import os
+
 from keras \
     import \
     Model
-
-import os
 
 from keras.losses \
     import SparseCategoricalCrossentropy
@@ -10,13 +13,10 @@ from keras.losses \
 from keras.optimizers \
     import Adam
 
-from domain.training.network.generate_middle_network \
-    import generate_middle_layer
-
-from domain.training.network.generate_in_out_network \
+from domain.training.model.vars \
     import \
-    generate_output, \
-    generate_input
+    zero, \
+    one
 
 
 class ClassifyModel:
@@ -67,10 +67,7 @@ class ClassifyModel:
         self.__make_model()
 
     def __make_model(self):
-        generate_input(self)
-        generate_middle_layer(self)
-        generate_output(self)
-
+        setup_of_model(self)
         self._make_model()
 
     def _compile(self):
@@ -97,7 +94,7 @@ class ClassifyModel:
             epochs=self.epoch,
             callbacks=self.callbacks,
             use_multiprocessing=False,
-            workers=1,
+            workers=one(),
             verbose=0
         )
 
@@ -118,7 +115,7 @@ class ClassifyModel:
                 )
             )
 
-            if number_of_files_in_directory > self.__zero__():
+            if number_of_files_in_directory > zero():
                 print('found checkpoint weights')
 
                 self.load_saved_model(
@@ -182,6 +179,3 @@ class ClassifyModel:
 
     def get_train_set(self):
         return self.training
-
-    def __zero__(self) -> int:
-        return 0

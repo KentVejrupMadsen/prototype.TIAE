@@ -7,12 +7,9 @@ from keras.layers \
     Dense, \
     Rescaling
 
-from domain.training \
-    import ClassifyModel
-
 
 def generate_input(
-        input_model: ClassifyModel,
+        input_model,
         input_shape: tuple = (256, 256, 3),
         batch_size: int = 32,
         scale_factor: float = 1./255
@@ -31,7 +28,7 @@ def generate_input(
 
 
 def generate_output(
-        output_model: ClassifyModel,
+        output_model,
         category_size: int = 4
 ):
     last_layer = Dense(

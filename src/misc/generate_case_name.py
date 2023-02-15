@@ -1,4 +1,4 @@
-from entropy.secure.setup_secure_random \
+from entropy \
     import get_randomizer
 
 from datetime \

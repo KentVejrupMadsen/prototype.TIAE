@@ -1,9 +1,9 @@
+from domain.training \
+    import run
+
 from extensions.wandb.artifacts \
     import upload_dataset_to_wandb \
     as upload_dataset_to_wandb
-
-from domain.training.network.training_classification_script \
-    import run
 
 from execute_domain \
     import Execution

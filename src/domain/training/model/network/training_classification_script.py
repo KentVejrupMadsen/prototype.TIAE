@@ -1,14 +1,5 @@
-from keras.utils \
-    import image_dataset_from_directory
-
-from tensorflow.python.data \
-    import AUTOTUNE
-
-from domain.callbacks.callback_factory \
+from domain.training.callbacks \
     import CallbackFactory
-
-from domain.training \
-    import ClassifyModel
 
 from state \
     import \
@@ -21,10 +12,21 @@ from state \
     set_categories, \
     set_validation_dataset, \
     get_training_dataset, \
-    get_validation_dataset, \
-    get_categories
+    get_validation_dataset
 
-model = None
+from domain.training.model.classifying_model \
+    import ClassifyModel
+
+from keras.utils \
+    import image_dataset_from_directory
+
+from tensorflow.python.data \
+    import AUTOTUNE
+
+from state.data.machine_learning \
+    import \
+    get_classify_model, \
+    set_classify_model
 
 
 def run():
@@ -80,10 +82,13 @@ def generate_datasets():
 
 
 def generate_network():
-    global model
     model = ClassifyModel(
         training=get_training_dataset(),
         validation=get_validation_dataset()
+    )
+
+    set_classify_model(
+        model
     )
 
 
@@ -114,11 +119,6 @@ def generate_train():
     get_classify_model().save(
         '/tmp/model.tf/'
     )
-
-
-def get_classify_model() -> ClassifyModel:
-    global model
-    return model
 
 
 def zero() -> int:
