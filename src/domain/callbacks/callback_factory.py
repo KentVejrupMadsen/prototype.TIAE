@@ -3,11 +3,8 @@ from keras.callbacks \
     EarlyStopping, \
     ModelCheckpoint
 
-from src.ai.training.classifying_model \
+from src.domain.training.classifying_model \
     import ClassifyModel
-
-from src.state.configuration \
-    import get_global_configuration
 
 
 class CallbackFactory:
@@ -17,33 +14,41 @@ class CallbackFactory:
     ):
         self.model = model
 
-    def append_early_stopper(self):
+    def append_early_stopper(
+            self,
+            verbose: int = 1,
+            patience: int = 4
+    ):
         callback = EarlyStopping(
             monitor='val_loss',
             mode='min',
-            verbose=1,
-            patience=4
+            verbose=verbose,
+            patience=patience
         )
+
         self.model.callbacks.append(
             callback
         )
 
-    def append_checkpoint(self):
+    def append_checkpoint(
+            self,
+            path_to_checkpoint: str,
+            verbose: int = 0,
+            save_best_only: bool = True,
+            save_weights_only: bool = False,
+    ):
         callback = ModelCheckpoint(
-            get_global_configuration()
-            ['tf']
-            ['checkpoint'],
+            path_to_checkpoint,
 
-            save_best_only=True,
-            save_weights_only=False,
+            save_best_only=save_best_only,
+            save_weights_only=save_weights_only,
 
             monitor='val_accuracy',
             mode='max',
 
-            verbose=1
+            verbose=verbose
         )
 
         self.model.callbacks.append(
             callback
         )
-

@@ -4,29 +4,8 @@ from keras.utils \
 from tensorflow.python.data \
     import AUTOTUNE
 
-from src.ai.callbacks.callback_factory \
+from src.domain.callbacks.callback_factory \
     import CallbackFactory
-
-from src.state.configuration \
-    import \
-    get_seed, \
-    get_training_dataset, \
-    get_validation_dataset, \
-    set_training_dataset, \
-    set_validation_dataset, \
-    set_categories, \
-    path_to_training_dataset, \
-    get_validation_split, \
-    get_image_size, \
-    get_batch_size, \
-    get_spectrum, \
-    get_option_crop_aspect_ratio, \
-    get_option_shuffle, \
-    get_global_configuration, \
-    get_categories
-
-from src.ai.training.classifying_model \
-    import ClassifyModel
 
 import wandb
 

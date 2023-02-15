@@ -6,9 +6,15 @@ from wandb \
     import finish \
     as wandb_finished
 
+from execute_domain \
+    import Execution
 
-class Testing:
+
+class Testing(
+    Execution
+):
     def __init__(self):
+        super().__init__()
         wandb_init(
             'tiae',
             save_code=True,
@@ -27,6 +33,9 @@ class Testing:
 
             notes='domain used for testing the algorithms capacity for prediction certain categories.'
         )
+
+    def execute(self):
+        pass
 
     def done(self):
         wandb_finished()

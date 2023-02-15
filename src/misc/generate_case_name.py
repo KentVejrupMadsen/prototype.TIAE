@@ -1,4 +1,4 @@
-from src.entropy.secure \
+from entropy.secure.setup_secure_random \
     import get_randomizer
 
 from datetime \
@@ -37,5 +37,3 @@ def generate_case_name(
            str(objects[chosen]) + ' : ' + \
            str(today.day) + ' - ' + \
            str(today.month)
-
-

@@ -1,7 +1,5 @@
-from src.state.configuration \
-    import \
-    get_update_state, \
-    get_train_path
+from state.global_state \
+    import get_train_path
 
 import os
 import wandb
@@ -39,4 +37,3 @@ def load():
             save_to_wandb()
     else:
         load_from_wandb()
-

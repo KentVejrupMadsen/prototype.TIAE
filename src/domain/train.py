@@ -1,14 +1,16 @@
-from src.misc.generate_case_name \
-    import generate_case_name
-
-from src.extensions.wandb.artifacts \
+from extensions.wandb.artifacts \
     import load \
     as load_dataset
 
+from execute_domain \
+    import Execution
 
-class Training:
+
+class Training(
+    Execution
+):
     def __init__(self):
-        generated_case_name = generate_case_name()
+        super().__init__()
 
     def execute(self):
         load_dataset()

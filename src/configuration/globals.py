@@ -8,7 +8,6 @@ import pathlib
 source_path = None
 repository_path = None
 
-
 def get_repository_path() -> str:
     global repository_path
     return repository_path
@@ -75,4 +74,3 @@ def debug():
         "repository directory:",
         get_repository_path()
     )
-

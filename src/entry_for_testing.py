@@ -1,4 +1,4 @@
-from src.domain.testing \
+from domain.test \
     import Testing
 
 

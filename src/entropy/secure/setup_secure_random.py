@@ -25,5 +25,3 @@ def setup() -> None:
     set_randomizer(
         random.SystemRandom()
     )
-
-

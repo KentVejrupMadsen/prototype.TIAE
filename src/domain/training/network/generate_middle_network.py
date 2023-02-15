@@ -1,89 +1,86 @@
-from keras.layers import Dense, Flatten, MaxPooling2D, Conv2D
+from keras.layers \
+    import \
+    Dense, \
+    Flatten, \
+    MaxPooling2D, \
+    Conv2D
 
 from src.domain.training.classifying_model \
     import ClassifyModel
 
-middle_layer_size = 6
-
-
-def get_middle_layer_size() -> int:
-    global middle_layer_size
-    return middle_layer_size
-
 
 def generate_middle_layer(
-        model: ClassifyModel
+        model: ClassifyModel,
+
+        kernel_size: tuple = (3, 3),
+        pool_size: tuple = (2, 2),
+
+        usage_of_bias: bool = True,
+        usage_of_bias_on_first_layer: bool = False,
+
+        start_size: int = 256,
+        mid_size: int = 256,
+        end_size: int = 256,
+
+        model_depth: int = 2
 ):
-        min_height = 256
+    first_layer_in_mid = Conv2D(
+        start_size,
+        kernel_size,
+        activation='relu',
+        use_bias=usage_of_bias_on_first_layer
+    )
 
-        first_layer_in_mid = Conv2D(
-            min_height,
-            (3, 3),
-            activation='relu',
-            use_bias=False
-        )
+    model.middle_layer = first_layer_in_mid(
+        model.input
+    )
 
-        model.middle_layer = first_layer_in_mid(
-            model.input
-        )
+    model.middle_layer = MaxPooling2D(pool_size)(
+        model.middle_layer
+    )
 
-        model.middle_layer = MaxPooling2D(
-            2,
-            2
-        )(
-            model.middle_layer
-        )
+    next_layer_size = mid_size / 2
 
-        next_layer_size = min_height / 2
+    model.middle_layer = Conv2D(
+        next_layer_size,
+        kernel_size,
+        activation='relu',
+        use_bias=usage_of_bias
+    )(model.middle_layer)
 
+    model.middle_layer = MaxPooling2D(
+        pool_size)(model.middle_layer)
+
+    for i in range(
+            0,
+            model_depth
+    ):
         model.middle_layer = Conv2D(
-            next_layer_size,
-            (3, 3),
+            mid_size / 4,
+            kernel_size,
             activation='relu',
-            use_bias=True
+            use_bias=usage_of_bias
         )(model.middle_layer)
 
-        model.middle_layer = MaxPooling2D(
-            2, 2
-        )(model.middle_layer)
+    model.middle_layer = MaxPooling2D(
+        pool_size)(model.middle_layer)
 
-        for i in range(
-                0,
-                get_middle_layer_size()
-        ):
-            model.middle_layer = Conv2D(
-                min_height / 4,
-                (3, 3),
-                activation='relu',
-                use_bias=True
-            )(model.middle_layer)
+    model.middle_layer = Conv2D(
+        mid_size / 8,
+        kernel_size,
+        activation='relu',
+        use_bias=usage_of_bias
+    )(
+        model.middle_layer
+    )
 
-        model.middle_layer = MaxPooling2D(
-            2, 2
-        )(
-            model.middle_layer
-        )
+    model.middle_layer = MaxPooling2D(
+        pool_size)(model.middle_layer)
 
-        model.middle_layer = Conv2D(
-            min_height / 8,
-            (3, 3),
-            activation='relu',
-            use_bias=True
-        )(
-            model.middle_layer
-        )
+    model.middle_layer = Flatten(
+    )(model.middle_layer)
 
-        model.middle_layer = MaxPooling2D(
-            2, 2
-        )(
-            model.middle_layer
-        )
-
-        model.middle_layer = Flatten()(
-            model.middle_layer
-        )
-
-        model.middle_layer = Dense(
-            128,
-            activation='relu'
-        )(model.middle_layer)
+    model.middle_layer = Dense(
+        end_size,
+        activation='relu'
+    )(model.middle_layer)
