@@ -3,7 +3,10 @@
 
 
 class Application:
-    def __init__(self, mode):
+    def __init__(
+            self,
+            mode
+    ):
         self.mode = None
 
         # making calls

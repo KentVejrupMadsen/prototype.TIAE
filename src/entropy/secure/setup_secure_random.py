@@ -13,10 +13,15 @@ def set_randomizer(
 def get_randomizer() -> random.SystemRandom:
     global random_generator
 
-    if random_generator is None:
+    if is_randomizer_none():
         setup()
 
     return random_generator
+
+
+def is_randomizer_none() -> bool:
+    global random_generator
+    return random_generator is None
 
 
 def setup() -> None:

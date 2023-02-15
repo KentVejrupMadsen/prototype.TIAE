@@ -7,7 +7,7 @@ from keras.layers \
     Dense, \
     Rescaling
 
-from src.domain.training.classifying_model \
+from domain.training \
     import ClassifyModel
 
 

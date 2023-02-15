@@ -6,11 +6,7 @@ from os.path \
 
 import json
 
-from configuration.management.entities.configuration \
-    import Configuration
-
-from configuration.management.entities.dictionary \
-    import Dictionary
+from configuration.management import Dictionary, Configuration
 
 cache = None
 
@@ -163,4 +159,3 @@ def load_configurations(
     return_values.append(
         configuration
     )
-

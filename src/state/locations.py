@@ -8,6 +8,7 @@ import pathlib
 source_path = None
 repository_path = None
 
+
 def get_repository_path() -> str:
     global repository_path
     return repository_path
@@ -62,6 +63,36 @@ def setup(
     )
 
     debug()
+
+
+train_path = r'/mnt/c/Workspace/TIAE/datasets/training-set'
+
+
+def get_path_to_training_dataset() -> str:
+    global train_path
+    return train_path
+
+
+def set_path_to_training_dataset(
+        value: str
+) -> None:
+    global train_path
+    train_path = value
+
+
+validate_path = None
+
+
+def get_path_to_validation_dataset() -> str:
+    global validate_path
+    return validate_path
+
+
+def set_path_to_validation_dataset(
+        value: str
+) -> None:
+    global validate_path
+    validate_path = value
 
 
 def debug():

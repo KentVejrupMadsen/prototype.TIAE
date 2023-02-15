@@ -5,7 +5,7 @@ from keras.layers \
     MaxPooling2D, \
     Conv2D
 
-from src.domain.training.classifying_model \
+from domain.training \
     import ClassifyModel
 
 
@@ -52,7 +52,7 @@ def generate_middle_layer(
         pool_size)(model.middle_layer)
 
     for i in range(
-            0,
+            zero(),
             model_depth
     ):
         model.middle_layer = Conv2D(
@@ -84,3 +84,7 @@ def generate_middle_layer(
         end_size,
         activation='relu'
     )(model.middle_layer)
+
+
+def zero() -> int:
+    return 0

@@ -1,17 +1,19 @@
-from configuration.management.entities.configuration \
-    import Configuration
-
+from configuration.management import Configuration
 from configuration.management.utils \
     import loader_for_configuration_setup
 
-from configuration.globals \
+from state.locations \
     import get_repository_path
+
+
+def zero() -> int:
+    return 0
 
 
 def is_zero(
         value: int
 ) -> bool:
-    return value == 0
+    return value == zero()
 
 
 def is_str_empty(

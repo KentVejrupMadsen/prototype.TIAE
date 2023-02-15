@@ -1,7 +1,7 @@
 from configuration.management.utils \
     import loader_for_dictionary_setup
 
-from configuration.globals \
+from state.locations \
     import get_repository_path
 
 
@@ -39,3 +39,9 @@ class DictionaryManager:
 
     def get_path(self) -> str:
         return self.configuration_path
+
+
+class Dictionary:
+    def __init__(self):
+
+        pass

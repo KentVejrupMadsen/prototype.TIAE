@@ -4,27 +4,25 @@ from keras.utils \
 from tensorflow.python.data \
     import AUTOTUNE
 
-from src.domain.callbacks.callback_factory \
+from domain.callbacks.callback_factory \
     import CallbackFactory
 
-import wandb
+from domain.training \
+    import ClassifyModel
 
-from state.global_state \
+from state \
     import \
     get_path_to_training_dataset, \
     get_validation_split, \
     get_seed, \
-    get_batch_size, \
     get_standard_image_size, \
-    get_categories, \
+    get_batch_size, \
+    set_training_dataset, \
     set_categories, \
     set_validation_dataset, \
-    get_validation_dataset, \
     get_training_dataset, \
-    set_training_dataset
-
-from domain.training.classifying_model \
-    import ClassifyModel
+    get_validation_dataset, \
+    get_categories
 
 model = None
 
@@ -67,7 +65,7 @@ def generate_datasets():
         seed=get_seed(),
         image_size=get_standard_image_size(),
         batch_size=get_batch_size(),
-        color_mode='rgba',
+        color_mode='rgb',
         crop_to_aspect_ratio=True,
         shuffle=True
     )
@@ -93,8 +91,12 @@ def generate_indexes(
         size_of_index: int
 ) -> list:
     r_values = []
-    for i in range(0, size_of_index):
-        r_values.append((i + 1))
+
+    for i in range(
+            zero(),
+            size_of_index
+    ):
+        r_values.append((i + one()))
 
     return r_values
 
@@ -105,56 +107,23 @@ def generate_train():
     )
 
     factory.append_early_stopper()
-    factory.append_checkpoint('')
+    factory.append_checkpoint('/tmp/checkpoint/')
 
     get_classify_model().fit_model()
 
     get_classify_model().save(
-        ''
-    )
-
-    history = get_classify_model().history
-
-    val_loss = history.history['val_loss']
-    val_acc = history.history['val_accuracy']
-
-    accuracy = history.history['accuracy']
-    loss = history.history['loss']
-
-    wandb.log(
-        {
-            'classes':
-                {
-                    'labels': get_categories()
-                },
-            'history':
-            {
-                'values':
-                    {
-                        'accuracy':
-                            {
-                                'values': val_acc,
-                            },
-                        'loss':
-                            {
-                                'values': val_loss,
-                            }
-                    },
-
-                'accuracy':
-                    {
-                        'values': accuracy,
-                    },
-
-                'loss':
-                    {
-                        'values': loss,
-                    }
-            },
-        }
+        '/tmp/model.tf/'
     )
 
 
 def get_classify_model() -> ClassifyModel:
     global model
     return model
+
+
+def zero() -> int:
+    return 0
+
+
+def one() -> int:
+    return 1

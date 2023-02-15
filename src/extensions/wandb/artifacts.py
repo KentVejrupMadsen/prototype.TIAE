@@ -1,10 +1,7 @@
-from state.global_state \
-    import \
-    get_path_to_training_dataset, \
-    get_update_dateset_online
-
-import os
 import wandb
+
+from os.path \
+    import isdir
 
 
 def load_from_wandb():
@@ -31,8 +28,8 @@ def save_to_wandb():
     )
 
 
-def load():
-    if os.path.isdir(
+def upload_dataset_to_wandb():
+    if isdir(
         get_path_to_training_dataset()
     ):
         if get_update_dateset_online():

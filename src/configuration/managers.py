@@ -1,9 +1,6 @@
-from configuration.management.configuration_manager \
-    import ConfigurationManager
-
-from configuration.management.dictionary_manager \
-    import DictionaryManager
-
+from configuration import \
+    DictionaryManager, \
+    ConfigurationManager
 
 # Singleton object. used globally
 singleton_configuration_manager = None
@@ -13,7 +10,7 @@ singleton_dictionary_manager = None
 def get_singleton_dictionary_manager() -> DictionaryManager:
     global singleton_dictionary_manager
 
-    if is_singleton_dictionary_manager():
+    if is_singleton_dictionary_manager_none():
         set_singleton_dictionary_manager(
             DictionaryManager()
         )
@@ -21,7 +18,7 @@ def get_singleton_dictionary_manager() -> DictionaryManager:
     return singleton_dictionary_manager
 
 
-def is_singleton_dictionary_manager() -> bool:
+def is_singleton_dictionary_manager_none() -> bool:
     global singleton_dictionary_manager
 
     if singleton_dictionary_manager is None:
@@ -62,5 +59,3 @@ def is_singleton_configuration_manager_null() -> bool:
         return True
 
     return False
-
-

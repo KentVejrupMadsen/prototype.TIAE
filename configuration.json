@@ -1,5 +1,18 @@
 {
     "type": "load",
+    "settings":
+    {
+      "checkpoint":
+      {
+        "clean_on_exit": false
+      },
+      "model":
+      {
+        "save_at": "",
+        "load_last_state": true,
+        "": " "
+      }
+    },
 
     "configuration":
     {

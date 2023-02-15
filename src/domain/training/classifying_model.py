@@ -10,10 +10,10 @@ from keras.losses \
 from keras.optimizers \
     import Adam
 
-from src.domain.training.network.generate_middle_network \
+from domain.training.network.generate_middle_network \
     import generate_middle_layer
 
-from src.domain.training.network.generate_in_out_network \
+from domain.training.network.generate_in_out_network \
     import \
     generate_output, \
     generate_input
@@ -23,7 +23,21 @@ class ClassifyModel:
     def __init__(
             self,
             training,
-            validation
+            validation,
+
+            name: str = 'threat.identification',
+
+            epoch: int = 5,
+
+            learning_rate: float = 0.004,
+            debugging: bool = False,
+
+            expand_information: bool = True,
+
+            is_training: bool = True,
+            is_to_overwrite_data: bool = True,
+            is_to_save_traces: bool = False,
+            is_to_save_optimizers: bool = True
     ):
         self.model = None
         self.history = None
@@ -37,14 +51,20 @@ class ClassifyModel:
 
         self.callbacks = []
 
+        self.is_training = is_training
+        self.is_to_overwrite = is_to_overwrite_data
+
+        self.is_to_save_traces = is_to_save_traces
+        self.is_to_save_optimizers = is_to_save_optimizers
+
+        self.epoch = epoch,
+        self.learning_rate = learning_rate
+
+        self.debug = debugging
+        self.expand = expand_information
+        self.name = name
+
         self.__make_model()
-        self.is_training = True
-
-        self.epoch = 5,
-        self.learning_rate = 0.002
-
-        self.debug: bool = False
-        self.expand: bool = True
 
     def __make_model(self):
         generate_input(self)
@@ -69,11 +89,16 @@ class ClassifyModel:
         )
 
     def fit_model(self):
+        print('fitting model')
+
         history = self.get_model().fit(
             self.get_train_set(),
             validation_data=self.get_validation_set(),
             epochs=self.epoch,
-            callbacks=self.callbacks
+            callbacks=self.callbacks,
+            use_multiprocessing=False,
+            workers=1,
+            verbose=0
         )
 
         self.history = history
@@ -93,7 +118,7 @@ class ClassifyModel:
                 )
             )
 
-            if number_of_files_in_directory > 0:
+            if number_of_files_in_directory > self.__zero__():
                 print('found checkpoint weights')
 
                 self.load_saved_model(
@@ -129,9 +154,9 @@ class ClassifyModel:
         self.get_model().save(
             filepath=path,
             save_format='tf',
-            include_optimizer=True,
-            save_traces=False,
-            overwrite=True
+            include_optimizer=self.is_to_save_optimizers,
+            save_traces=self.is_to_save_traces,
+            overwrite=self.is_to_overwrite
         )
 
     def load_saved_model(
@@ -157,3 +182,6 @@ class ClassifyModel:
 
     def get_train_set(self):
         return self.training
+
+    def __zero__(self) -> int:
+        return 0
