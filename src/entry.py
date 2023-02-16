@@ -1,9 +1,17 @@
-﻿from classify \
-    import run
+﻿import os
+os.environ['TF_CPP_MIN_LOG_LEVEL']='3'
+
+from setup_tensorflow \
+    import setupTensorFlow
+
+from __init__ \
+    import TrainSegmentation
+
+setupTensorFlow()
 
 
 def main():
-    run()
+    TrainSegmentation()
 
 
 if __name__ == '__main__':

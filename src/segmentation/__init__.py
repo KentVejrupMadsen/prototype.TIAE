@@ -1,1 +1,2 @@
-﻿from classify.script import run
+﻿from segmentation.script \
+    import run
