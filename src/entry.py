@@ -1,6 +1,9 @@
-﻿def main():
+﻿from classify \
+    import run
 
-    pass
+
+def main():
+    run()
 
 
 if __name__ == '__main__':
