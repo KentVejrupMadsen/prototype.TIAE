@@ -1,4 +1,5 @@
-﻿import os
+﻿import wandb
+import os
 os.environ['TF_CPP_MIN_LOG_LEVEL']='3'
 
 from setup_tensorflow \
@@ -11,6 +12,7 @@ setupTensorFlow()
 
 
 def main():
+    wandb.init()
     TrainSegmentation()
 
 

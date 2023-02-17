@@ -8,7 +8,8 @@
     getImageSize, \
     getImageWidth, \
     getLoadOldWeigths, \
-    getValidationSize
+    getValidationSize, \
+    getSpectrumLabel
 
 from configuration.location \
     import \
@@ -16,10 +17,6 @@ from configuration.location \
 
 from configuration.buffer \
     import \
-    get_training_set, \
-    get_validation_set, \
-    set_training_set, \
-    set_validation_set, \
     getNvidiaGpuMemoryLimit, \
     getUseGpu, \
     getLogicalGpus

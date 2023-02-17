@@ -2,20 +2,26 @@
 epoch: int = 10
 batch_size: int = 32
 
-width: int = 256
-height: int = 256
+width: int = 512
+height: int = 512
 
-spectrum: int = 4
+spectrum_label: str = 'rgba'
+spectrum: int = len(spectrum_label)
 
 size: tuple = (width, height)
 full: tuple = (width, height, spectrum)
 
-validation_size: float = 0.45
+validation_size: float = 0.40
 
 load_old_weights: bool = True
 
 
 # Accessors
+def getSpectrumLabel() -> str:
+    global spectrum_label
+    return spectrum_label
+
+
 def getEpoch() -> int:
     global epoch
     return epoch
