@@ -1,5 +1,10 @@
 ﻿from keras.layers \
-    import GlobalAveragePooling2D, Dense
+    import \
+    Dense, \
+    Flatten
+
+from configuration \
+    import get_maximum_of_output_labels
 
 from segmentation.temperary \
     import \
@@ -10,12 +15,24 @@ from segmentation.temperary \
 
 def setup_output_layer():
     if not get_middle_network() is None:
-        layer = GlobalAveragePooling2D()(
+        flattened = Flatten()(
             get_middle_network()
         )
 
         layer = Dense(
-            size_of_categories()
+            get_maximum_of_output_labels(),
+            name='decision_layer',
+            activation='softmax',
+            use_bias=True
+        )(
+            flattened
+        )
+
+        layer = Dense(
+            get_maximum_of_output_labels() / 2,
+            name='prediction',
+            use_bias=False,
+            activation='sigmoid'
         )(layer)
 
         set_output_layer(layer)

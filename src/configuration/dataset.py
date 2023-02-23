@@ -1,67 +1,84 @@
 ﻿# Settings
-epoch: int = 10
-batch_size: int = 32
+epoch: int = 1
+batch_size: int = 1
 
-width: int = 512
-height: int = 512
+full_width_of_screen: int = 1280
+full_height_of_screen: int = 720
 
-spectrum_label: str = 'rgba'
+width: int = int(full_width_of_screen / 4)
+height: int = int(full_height_of_screen / 4)
+
+spectrum_label: str = 'rgb'
 spectrum: int = len(spectrum_label)
 
 size: tuple = (width, height)
 full: tuple = (width, height, spectrum)
 
-validation_size: float = 0.40
+validation_size: float = 0.5
 
 load_old_weights: bool = True
+max_output_labels: int = 100
 
 
 # Accessors
-def getSpectrumLabel() -> str:
+def get_maximum_of_output_labels() -> int:
+    global max_output_labels
+    return max_output_labels
+
+
+def set_maximum_of_output_labels(
+        value: int
+) -> None:
+    global max_output_labels
+    max_output_labels = value
+
+
+
+def get_spectrum_label() -> str:
     global spectrum_label
     return spectrum_label
 
 
-def getEpoch() -> int:
+def get_epoch() -> int:
     global epoch
     return epoch
 
 
-def getBatchSize() -> int:
+def get_batch_size() -> int:
     global batch_size
     return batch_size
 
 
-def getImageWidth() -> int:
+def get_image_width() -> int:
     global width
     return width
 
 
-def getImageHeight() -> int:
+def get_image_height() -> int:
     global height
     return height
 
 
-def getColorSpectrum() -> int:
+def get_color_spectrum() -> int:
     global spectrum
     return spectrum
 
 
-def getImageSize() -> tuple:
+def get_image_size() -> tuple:
     global size
     return size
 
 
-def getFullSize() -> tuple:
+def get_full_size() -> tuple:
     global full
     return full
 
 
-def getValidationSize() -> float:
+def get_validation_size() -> float:
     global validation_size
     return validation_size
 
 
-def getLoadOldWeigths() -> bool:
+def get_load_old_weigths() -> bool:
     global load_old_weights
     return load_old_weights

@@ -1,6 +1,9 @@
 ﻿from keras \
     import Model
 
+from keras.losses \
+    import SparseCategoricalCrossentropy
+
 from segmentation.setup \
     import setup_segmentation_dataset
 
@@ -13,7 +16,8 @@ from segmentation.network \
 from segmentation.temperary \
     import \
     get_output_layer, \
-    get_input_layer, set_model
+    get_input_layer, \
+    set_model
 
 from segmentation.training \
     import train
@@ -27,11 +31,20 @@ def create_model() -> None:
     model = Model(
         inputs=get_input_layer(),
         outputs=get_output_layer(),
-        name='classify example'
+        name='classify-example'
+    )
+
+    model.compile(
+        optimizer='adam',
+
+        loss=SparseCategoricalCrossentropy(
+            from_logits=False
+        ),
+
+        metrics=['accuracy']
     )
 
     model.summary()
-    model.compile()
 
     set_model(model)
 

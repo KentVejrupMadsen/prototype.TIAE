@@ -1,22 +1,25 @@
 ﻿from configuration.dataset \
     import \
-    getBatchSize, \
-    getColorSpectrum, \
-    getEpoch, \
-    getFullSize, \
-    getImageHeight, \
-    getImageSize, \
-    getImageWidth, \
-    getLoadOldWeigths, \
-    getValidationSize, \
-    getSpectrumLabel
+    get_batch_size, \
+    get_color_spectrum, \
+    get_epoch, \
+    get_full_size, \
+    get_image_height, \
+    get_image_size, \
+    get_image_width, \
+    get_load_old_weigths, \
+    get_validation_size, \
+    get_spectrum_label, \
+    get_maximum_of_output_labels, \
+    set_maximum_of_output_labels
 
 from configuration.location \
     import \
-    getDataPath
+    get_data_path, \
+    get_model_path
 
 from configuration.buffer \
     import \
-    getNvidiaGpuMemoryLimit, \
-    getUseGpu, \
-    getLogicalGpus
+    get_nvidia_gpu_memory_limit, \
+    get_use_gpu, \
+    get_logical_gpus

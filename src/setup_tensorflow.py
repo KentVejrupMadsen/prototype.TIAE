@@ -13,9 +13,9 @@ from tensorflow.python.framework.config \
 
 from configuration \
     import \
-    getUseGpu, \
-    getNvidiaGpuMemoryLimit, \
-    getLogicalGpus
+    get_use_gpu, \
+    get_nvidia_gpu_memory_limit, \
+    get_logical_gpus
 
 set_log_device_placement(False)
 
@@ -39,7 +39,7 @@ def setupTensorFlow():
 def setup_gpu(physicalDevice):
     global done
 
-    if getUseGpu():
+    if get_use_gpu():
         if not done:
             print(
                 'found: ',
@@ -49,10 +49,10 @@ def setup_gpu(physicalDevice):
 
             for e in range(
                     0,
-                    getLogicalGpus()
+                    get_logical_gpus()
             ):
                 generated = LogicalDeviceConfiguration(
-                    memory_limit=getNvidiaGpuMemoryLimit()
+                    memory_limit=get_nvidia_gpu_memory_limit()
                 )
 
                 print(
@@ -81,7 +81,7 @@ def setup_gpu(physicalDevice):
 def setup_cpu(physicalDevice):
     global done
 
-    if not getUseGpu():
+    if not get_use_gpu():
         if not done:
             print('found: ', physicalDevice)
         else:

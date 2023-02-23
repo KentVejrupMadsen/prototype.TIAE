@@ -1,20 +1,20 @@
-﻿from keras import Input
+﻿from keras \
+    import Input
+
 from keras.layers \
     import Rescaling
 
 from configuration \
     import \
-    getImageWidth, \
-    getImageHeight, \
-    getColorSpectrum
+    get_image_width, \
+    get_image_height, \
+    get_color_spectrum
 
 from segmentation.temperary \
     import set_input_layer
 
 
 def setup_input_layer():
-    input = None
-
     input = make_input()
     input = make_scaling()(input)
 
@@ -34,8 +34,8 @@ def make_scaling():
 def make_input():
     return Input(
         shape=(
-            getImageWidth(),
-            getImageHeight(),
-            getColorSpectrum()
+            get_image_width(),
+            get_image_height(),
+            get_color_spectrum()
         )
     )

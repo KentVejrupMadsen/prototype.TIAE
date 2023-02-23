@@ -1,18 +1,19 @@
-﻿nvidia_gpu_memory_limit = 1024
+﻿nvidia_gpu_memory_limit = 3850
+
 use_gpu = True
-logical_gpus = 2
+logical_gpus = 1
 
 
-def getUseGpu() -> bool:
+def get_use_gpu() -> bool:
     global use_gpu
     return use_gpu
 
 
-def getLogicalGpus() -> int:
+def get_logical_gpus() -> int:
     global logical_gpus
     return logical_gpus
 
 
-def getNvidiaGpuMemoryLimit() -> int:
+def get_nvidia_gpu_memory_limit() -> int:
     global nvidia_gpu_memory_limit
     return nvidia_gpu_memory_limit

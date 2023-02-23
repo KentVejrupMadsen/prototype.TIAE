@@ -3,11 +3,12 @@
 
 from configuration \
     import \
-    getDataPath, \
-    getValidationSize, \
-    getImageSize, \
-    getBatchSize, \
-    getSpectrumLabel
+    get_data_path, \
+    get_validation_size, \
+    get_image_size, \
+    get_batch_size, \
+    get_spectrum_label, \
+    set_maximum_of_output_labels
 
 from segmentation.temperary \
     import \
@@ -15,7 +16,9 @@ from segmentation.temperary \
     set_validation_dataset, \
     set_training_dataset_seed, \
     set_validation_dataset_seed, \
-    set_categories
+    set_categories, \
+    get_training_dataset_seed, \
+    get_validation_dataset_seed
 
 from keras.utils \
     import image_dataset_from_directory \
@@ -25,7 +28,7 @@ from random \
     import SystemRandom
 
 
-def setup_segmentation_dataset():
+def setup_seeds():
     train_seed = SystemRandom().randint(
         1,
         4294967295
@@ -42,15 +45,18 @@ def setup_segmentation_dataset():
         validation_seed
     )
 
+
+def setup_segmentation_dataset():
+    setup_seeds()
+
     training_set = dataset_from_directory(
-        getDataPath(),
-        validation_split=getValidationSize(),
+        get_data_path(),
+        validation_split=get_validation_size(),
         subset='training',
-        image_size=getImageSize(),
-        batch_size=getBatchSize(),
-        label_mode='categorical',
-        seed=train_seed,
-        color_mode=getSpectrumLabel(),
+        image_size=get_image_size(),
+        batch_size=get_batch_size(),
+        seed=get_training_dataset_seed(),
+        color_mode=get_spectrum_label(),
         crop_to_aspect_ratio=True,
         follow_links=True
     )
@@ -66,14 +72,13 @@ def setup_segmentation_dataset():
     )
 
     validation_set = dataset_from_directory(
-        getDataPath(),
-        validation_split=getValidationSize(),
+        get_data_path(),
+        validation_split=get_validation_size(),
         subset='validation',
-        image_size=getImageSize(),
-        batch_size=getBatchSize(),
-        seed=validation_seed,
-        label_mode='categorical',
-        color_mode=getSpectrumLabel(),
+        image_size=get_image_size(),
+        batch_size=get_batch_size(),
+        seed=get_validation_dataset_seed(),
+        color_mode=get_spectrum_label(),
         crop_to_aspect_ratio=True,
         follow_links=True
     )
@@ -88,7 +93,7 @@ def setup_segmentation_dataset():
 def optimise_dataset(dataset):
     dataset.cache()
     dataset.shuffle(
-        100
+        250
     )
 
     dataset.prefetch(
